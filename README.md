@@ -1,3 +1,4 @@
+---
 title: Zara Dashboard
 emoji: 🚀
 colorFrom: red
@@ -8,3 +9,4 @@ tags:
   - streamlit
 pinned: false
 short_description: Streamlit template space
+---
