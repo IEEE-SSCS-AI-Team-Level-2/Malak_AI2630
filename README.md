@@ -7,7 +7,7 @@ sdk: docker
 app_port: 8501
 tags:
   - streamlit
-app_file: dashboard.py
+app_file: Zara Dashboard/src/dashboard.py
 pinned: false
 short_description: Streamlit template space
 ---
