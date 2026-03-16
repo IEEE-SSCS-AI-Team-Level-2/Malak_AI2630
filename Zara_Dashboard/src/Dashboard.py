@@ -20,7 +20,7 @@ st.sidebar.header('Zara Dashboard')
 
 # countries filter
 st.sidebar.header("Global Filters")
-countries = ["All"] + sorted(df['Origin'].unique().tolist())
+all_countries = sorted(df['Origin'].unique().tolist())
 selected_countries = st.sidebar.multiselect(
     "Select Countries of Origin", 
     options=all_countries, 
