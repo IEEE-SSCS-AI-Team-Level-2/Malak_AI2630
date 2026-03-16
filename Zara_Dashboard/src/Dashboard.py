@@ -60,33 +60,39 @@ col4.metric("Best Season", best_season)
 
 st.divider()
 
-# Distribution analysis
-st.subheader("Distributions Analysis")
-col_dist1, col_dist2 = st.columns(2)
+# set the whole thing in dark mode
+plt.rcParams.update({
+    "axes.facecolor": (0, 0, 0, 0),  # Transparent axes
+    "figure.facecolor": (0, 0, 0, 0), # Transparent figure
+    "axes.edgecolor": "white",       # White border lines
+    "axes.labelcolor": "white",      # White 'Price', 'Revenue' labels
+    "xtick.color": "white",          # White x-axis numbers
+    "ytick.color": "white",          # White y-axis numbers
+    "grid.color": "rgba(255, 255, 255, 0.1)", # Subtle white grid
+    "text.color": "white"            # Global text color
+})
 
-chart_size = (5, 4)
-with col_dist1:
-    st.write("Price Distribution")
-    
-    fig1, ax1 = plt.subplots(figsize=chart_size)
-    sns.kdeplot(data=filtered_df, x='Price', fill=True, color='#3498db', ax=ax1)
-    
-    fig1.patch.set_alpha(0)
-    ax1.set_facecolor((0, 0, 0, 0)) 
-    
-    st.pyplot(fig1)
+#Distribution Analysis
+dist_container = st.container()
 
-with col_dist2:
-    st.write("Revenue Distribution")
-    fig2, ax2 = plt.subplots(figsize=chart_size)
-    sns.kdeplot(data=filtered_df, x='revenue', fill=True, color='#e74c3c', ax=ax2)
+with dist_container:
+    st.subheader("Distributions Analysis")
+    col_dist1, col_dist2 = st.columns(2)
+    chart_size = (5, 4)
     
-    fig2.patch.set_alpha(0)
-    ax2.set_facecolor((0, 0, 0, 0))
-    
-    ax2.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: f"{x/1e6:.1f}M"))
-    
-    st.pyplot(fig2)
+    with col_dist1:
+        fig1, ax1 = plt.subplots(figsize=(5, 4))
+        sns.kdeplot(data=filtered_df, x='Price', fill=True, color='#3498db', ax=ax1)
+        fig1.patch.set_alpha(0)
+        ax1.set_facecolor((0, 0, 0, 0))
+        st.pyplot(fig1, clear_figure=True) 
 
+    with col_dist2:
+        fig2, ax2 = plt.subplots(figsize=(5, 4))
+        sns.kdeplot(data=filtered_df, x='revenue', fill=True, color='#e74c3c', ax=ax2)
+        fig2.patch.set_alpha(0)
+        ax2.set_facecolor((0, 0, 0, 0))
+        ax2.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: f"{x/1e6:.1f}M"))
+        st.pyplot(fig2, clear_figure=True)
 
 st.divider()
