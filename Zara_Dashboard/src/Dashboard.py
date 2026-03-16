@@ -8,12 +8,12 @@ st.set_page_config(page_title="Zara Sales Dashboard", layout="wide")
 # Some helper funstions
 @st.cache_data
 def load_data():
-    data = pd.read_csv("Zara_Dashboard/src/Zara_sales_dataset_preprocessed.csv")
+    data = pd.read_csv("Zara_Dashboard/src/Zara_sales_dataset_preprocessed.v1.csv")
     data['DATE'] = pd.to_datetime(data['DATE'])
     data['NET_SUBSCRIBERS'] = data['SUBSCRIBERS_GAINED'] - data['SUBSCRIBERS_LOST']
     return data
 
-df = pd.read_csv("Zara_Dashboard/src/Zara_sales_dataset_preprocessed.csv")
+df = pd.read_csv("Zara_Dashboard/src/zara_data_final.v1.csv")
 
 # sidebar
 st.sidebar.header('Zara Dashboard')
