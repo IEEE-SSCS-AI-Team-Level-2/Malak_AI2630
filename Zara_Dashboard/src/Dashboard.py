@@ -13,7 +13,7 @@ def load_data():
     data['NET_SUBSCRIBERS'] = data['SUBSCRIBERS_GAINED'] - data['SUBSCRIBERS_LOST']
     return data
 
-df = pd.read_csv("Zara_Dashboard/src/zara_data_final.v1.csv")
+df = pd.read_csv("Zara_Dashboard/src/Zara_sales_dataset_preprocessed.v1.csv")
 
 # sidebar
 st.sidebar.header('Zara Dashboard')
