@@ -119,3 +119,22 @@ with seas_container:
         st.pyplot(fig4)
 
 st.divider()
+
+# Category and Material Analysis
+cat_mat_container = st.container()
+
+with cat_mat_container:
+    st.subheader("Category & Material Analysis")
+    
+    tab1, tab2 = st.tabs(["By Product Terms", "By Material"])
+    
+    with tab1:
+        fig5, ax5 = plt.subplots(figsize=(10, 5))
+        sns.barplot(data=filtered_df, x='Terms', y='revenue', ax=ax5)
+        st.pyplot(fig5)
+    
+    with tab2:
+        fig6, ax6 = plt.subplots(figsize=(10, 5))
+        sns.countplot(data=filtered_df, x='Material', order=filtered_df['Material'].value_counts().index, ax=ax6)
+        plt.xticks(rotation=45)
+        st.pyplot(fig6)
