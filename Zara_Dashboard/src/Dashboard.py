@@ -62,16 +62,15 @@ st.divider()
 
 # set the whole thing in dark mode
 plt.rcParams.update({
-    "axes.facecolor": (0, 0, 0, 0),  # Transparent axes
-    "figure.facecolor": (0, 0, 0, 0), # Transparent figure
-    "axes.edgecolor": "white",       # White border lines
-    "axes.labelcolor": "white",      # White 'Price', 'Revenue' labels
-    "xtick.color": "white",          # White x-axis numbers
-    "ytick.color": "white",          # White y-axis numbers
-    "grid.color": "rgba(255, 255, 255, 0.1)", # Subtle white grid
-    "text.color": "white"            # Global text color
+    "axes.facecolor": (0, 0, 0, 0),
+    "figure.facecolor": (0, 0, 0, 0),
+    "axes.edgecolor": "white",
+    "axes.labelcolor": "white",
+    "xtick.color": "white",
+    "ytick.color": "white",
+    "grid.color": "#ffffff22",
+    "text.color": "white"
 })
-
 #Distribution Analysis
 dist_container = st.container()
 
