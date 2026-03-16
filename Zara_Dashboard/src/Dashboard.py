@@ -21,12 +21,17 @@ st.sidebar.header('Zara Dashboard')
 # countries filter
 st.sidebar.header("Global Filters")
 countries = ["All"] + sorted(df['Origin'].unique().tolist())
-selected_country = st.sidebar.selectbox("Select Country", countries)
+selected_countries = st.sidebar.multiselect(
+    "Select Countries of Origin", 
+    options=all_countries, 
+    default=all_countries
+)
 
-if selected_country != 'All':
-    filtered_df = df[df['Origin'] == selected_country]
+if not selected_countries:
+    st.warning("Please select at least one country to view data.")
+    filtered_df = df.iloc[0:0]
 else:
-    filtered_df = df
+    filtered_df = df[df['Origin'].isin(selected_countries)]
 
 
 st.sidebar.markdown('''
@@ -50,5 +55,25 @@ col1.metric("Avg Revenue", f"${avg_rev/1e3:.1f}K")
 col2.metric("Total Units Sold", f"{total_sold:,}")
 col3.metric("Top Category", top_term.title())
 col4.metric("Best Season", best_season)
+
+st.divider()
+
+# Distribution analysis
+st.subheader("Distributions Analysis")
+col_dist1, col_dist2 = st.columns(2)
+
+with col_dist1:
+    st.write("Price Distribution")
+    fig1, ax1 = plt.subplots()
+    sns.kdeplot(data=filtered_df, x='Price', fill=True, color='#3498db', ax=ax1)
+    st.pyplot(fig1)
+
+with col_dist2:
+    st.write("Revenue Distribution")
+    fig2, ax2 = plt.subplots()
+    sns.kdeplot(data=filtered_df, x='revenue', fill=True, color='#e74c3c', ax=ax2)
+    # Format X-axis to show Millions (M)
+    ax2.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: f"{x/1e6:.1f}M"))
+    st.pyplot(fig2)
 
 st.divider()
