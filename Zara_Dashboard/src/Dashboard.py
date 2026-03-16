@@ -64,18 +64,29 @@ st.divider()
 st.subheader("Distributions Analysis")
 col_dist1, col_dist2 = st.columns(2)
 
+chart_size = (5, 4)
 with col_dist1:
     st.write("Price Distribution")
-    fig1, ax1 = plt.subplots()
+    
+    fig1, ax1 = plt.subplots(figsize=chart_size)
     sns.kdeplot(data=filtered_df, x='Price', fill=True, color='#3498db', ax=ax1)
+    
+    fig1.patch.set_alpha(0)
+    ax1.set_facecolor((0, 0, 0, 0)) 
+    
     st.pyplot(fig1)
 
 with col_dist2:
     st.write("Revenue Distribution")
-    fig2, ax2 = plt.subplots()
+    fig2, ax2 = plt.subplots(figsize=chart_size)
     sns.kdeplot(data=filtered_df, x='revenue', fill=True, color='#e74c3c', ax=ax2)
-    # Format X-axis to show Millions (M)
+    
+    fig2.patch.set_alpha(0)
+    ax2.set_facecolor((0, 0, 0, 0))
+    
     ax2.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: f"{x/1e6:.1f}M"))
+    
     st.pyplot(fig2)
+
 
 st.divider()
