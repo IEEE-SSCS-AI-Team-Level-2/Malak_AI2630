@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from datetime import timedelta, datetime
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Set page config
 st.set_page_config(page_title="Zara Sales Dashboard", layout="wide")
@@ -28,10 +30,10 @@ selected_countries = st.sidebar.multiselect(
 )
 
 if not selected_countries:
-    st.warning("Please select at least one country to view data.")
-    filtered_df = df.iloc[0:0]
-else:
-    filtered_df = df[df['Origin'].isin(selected_countries)]
+    selected_countries = all_countries
+    st.sidebar.info("Showing all countries by default.")
+
+filtered_df = df[df['Origin'].isin(selected_countries)]
 
 
 st.sidebar.markdown('''
