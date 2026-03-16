@@ -17,11 +17,14 @@ df = pd.read_csv("Zara_Dashboard/src/Zara_sales_dataset_preprocessed.csv")
 
 # sidebar
 st.sidebar.header('Zara Dashboard')
+st.logo(image="images/streamlit-logo-primary-colormark-lighttext.png", 
+        icon_image="images/streamlit-mark-color.png")
 
 # countries filter
-countries = ['All'] + sorted(df['Origin'].unique().tolist())
+st.sidebar.header("Global Filters")
+countries = ["All"] + sorted(df['Origin'].unique().tolist())
+selected_country = st.sidebar.selectbox("Select Country", countries)
 
-selected_country = st.sidebar.selectbox("Select Country of Origin", countries)
 if selected_country != 'All':
     filtered_df = df[df['Origin'] == selected_country]
 else:
@@ -34,19 +37,20 @@ st.sidebar.markdown('''
 
 # Matrics
 # average revenue
-avg_revenue = filtered_df['revenue'].mean()
-total_units = filtered_df['Sales Volume'].sum()
+avg_rev = filtered_df['revenue'].mean()
+total_sold = filtered_df['Sales Volume'].sum()
 
 # season with highest activity
-best_season_vol = filtered_df.groupby('Season')['Sales Volume'].sum().idxmax()
+seasonal_revenue = filtered_df.groupby('Season')['revenue'].sum()
+best_season = seasonal_revenue.idxmax()
 
 # most sold term
-top_term = filtered_df.groupby('Terms')['Sales Volume'].sum().idxmax()
+top_term = filtered_df['Terms'].mode()[0]
 
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("Avg Revenue", f"${avg_revenue/1e3:.1f}K")
-col2.metric("Units Sold", f"{total_units:,}")
-col3.metric("Top Term", top_term)
-col4.metric("Best Season", best_season_vol)
+col1.metric("Avg Revenue", f"${avg_rev/1e3:.1f}K")
+col2.metric("Total Units Sold", f"{total_sold:,}")
+col3.metric("Top Category", top_term.title())
+col4.metric("Best Season", best_season)
 
-st.divider() # Adds a clean line before your charts
+st.divider()
