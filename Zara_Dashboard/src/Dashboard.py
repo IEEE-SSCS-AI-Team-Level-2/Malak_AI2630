@@ -97,3 +97,25 @@ with dist_container:
         st.pyplot(fig2, clear_figure=True)
 
 st.divider()
+
+# Seasonal Analysis
+
+seas_container = st.container()
+
+with seas_container:
+    st.subheader("Seasonal Performance")
+    col_s1, col_s2 = st.columns(2)
+    
+    with col_s1:
+        st.write("Avg Revenue per Season")
+        fig3, ax3 = plt.subplots()
+        sns.barplot(data=filtered_df, x='Season', y='revenue', palette='viridis', ax=ax3)
+        st.pyplot(fig3)
+    
+    with col_s2:
+        st.write("Sales Count per Season")
+        fig4, ax4 = plt.subplots()
+        sns.countplot(data=filtered_df, x='Season', palette='magma', ax=ax4)
+        st.pyplot(fig4)
+
+st.divider()
