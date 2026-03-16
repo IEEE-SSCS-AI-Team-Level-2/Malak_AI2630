@@ -17,8 +17,6 @@ df = pd.read_csv("Zara_Dashboard/src/Zara_sales_dataset_preprocessed.csv")
 
 # sidebar
 st.sidebar.header('Zara Dashboard')
-st.logo(image="images/streamlit-logo-primary-colormark-lighttext.png", 
-        icon_image="images/streamlit-mark-color.png")
 
 # countries filter
 st.sidebar.header("Global Filters")
